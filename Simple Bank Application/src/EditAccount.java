@@ -103,7 +103,8 @@ public class EditAccount implements ActionListener {
         editAccountFrame.add(titlePanel, BorderLayout.NORTH);
         editAccountFrame.add(footerPanel, BorderLayout.SOUTH);
 
-        ImageIcon bankIcon = new ImageIcon("resources/images/bank of marmerica icon.png");
+        //ImageIcon bankIcon = new ImageIcon("resources/images/bank of marmerica icon.png");
+        ImageIcon bankIcon = new ImageIcon(getClass().getClassLoader().getResource("images/bank of marmerica icon.png"));
         editAccountFrame.setIconImage(bankIcon.getImage());
 
         editAccountFrame.setTitle("BoM - View/Edit Acc");
@@ -113,7 +114,7 @@ public class EditAccount implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == launchPageButton) {
-            SoundPlayer.playSound("resources/audio/click.wav");
+            SoundPlayer.playSound("audio/click.wav");
             editAccountFrame.dispose();
             new LaunchPage();
         }
@@ -131,7 +132,7 @@ public class EditAccount implements ActionListener {
             }
 
             if (foundAccount != null) {
-                SoundPlayer.playSound("resources/audio/click.wav");
+                SoundPlayer.playSound("audio/click.wav");
                 selectedAcc = accountName;
                 accountsListLabel.setText(BankAccount.accountToString(accountName));
 
@@ -140,7 +141,7 @@ public class EditAccount implements ActionListener {
                 editMenuDepositButton.setVisible(true);
                 editMenuWithdrawButton.setVisible(true);
             } else {
-                SoundPlayer.playSound("resources/audio/windowsxpError.wav");
+                SoundPlayer.playSound("audio/windowsxpError.wav");
                 accountsListLabel.setText("Account Not Found");
             }
 
@@ -159,13 +160,13 @@ public class EditAccount implements ActionListener {
 
                 BankAccount foundAccount = findAccountByName(selectedAcc);
                 if (foundAccount != null) {
-                    SoundPlayer.playSound("resources/audio/click.wav");
+                    SoundPlayer.playSound("audio/click.wav");
                     foundAccount.deposit(editAmount);
                     accountsListLabel.setText(BankAccount.accountToString(selectedAcc));
                     editMenuConfirmLabel.setText("$" + editAmount + " Deposited");
                 }
             } catch (NumberFormatException e2) {
-                SoundPlayer.playSound("resources/audio/windowsxpError.wav");
+                SoundPlayer.playSound("audio/windowsxpError.wav");
                 editMenuConfirmLabel.setText("Enter Valid Amount");
             }
 
@@ -180,17 +181,17 @@ public class EditAccount implements ActionListener {
 
                 BankAccount foundAccount = findAccountByName(selectedAcc);
                 if (foundAccount != null && foundAccount.getBalance() >= editAmount) {
-                    SoundPlayer.playSound("resources/audio/click.wav");
+                    SoundPlayer.playSound("audio/click.wav");
                     foundAccount.withdraw(editAmount);
                     accountsListLabel.setText(BankAccount.accountToString(selectedAcc));
                     editMenuConfirmLabel.setText("$" + editAmount + " Withdrawn");
                 }
                 else if (foundAccount.getBalance() < editAmount) { // withdraw cannot exceed balance
-                    SoundPlayer.playSound("resources/audio/windowsxpError.wav");
+                    SoundPlayer.playSound("audio/windowsxpError.wav");
                     editMenuConfirmLabel.setText("Not Enough Funds");
                 }
             } catch (NumberFormatException e2) {
-                SoundPlayer.playSound("resources/audio/windowsxpError.wav");
+                SoundPlayer.playSound("audio/windowsxpError.wav");
                 editMenuConfirmLabel.setText("Enter Valid Amount");
             }
 

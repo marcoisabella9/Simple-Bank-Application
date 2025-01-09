@@ -55,11 +55,12 @@ public class LaunchPage implements ActionListener {
         launchFrame.add(footerPanel, BorderLayout.SOUTH);
 
         // Creating and using bankIcon
-        ImageIcon bankIcon = new ImageIcon("resources/images/bank of marmerica icon.png");
+        //ImageIcon bankIcon = new ImageIcon("resources/images/bank of marmerica icon.png");
+        ImageIcon bankIcon = new ImageIcon(getClass().getClassLoader().getResource("images/bank of marmerica icon.png"));
         launchFrame.setIconImage(bankIcon.getImage());
 
-        File file = new File("resources/images/bank of marmerica icon.png");
-        System.out.println(file.exists() ? "Image Found" : "Image not found");
+        //File file = new File("resources/images/bank of marmerica icon.png");
+        //System.out.println(file.exists() ? "Image Found" : "Image not found");
 
         launchFrame.setTitle("Bank of Marmerica");
         launchFrame.setVisible(true);
@@ -69,12 +70,12 @@ public class LaunchPage implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createAccountButton) {
-            SoundPlayer.playSound("resources/audio/click.wav");
+            SoundPlayer.playSound("audio/click.wav");
             launchFrame.dispose();
             new CreateAccount();
         }
         if (e.getSource() == editAccountButton) {
-            SoundPlayer.playSound("resources/audio/click.wav");
+            SoundPlayer.playSound("audio/click.wav");
             launchFrame.dispose();
             new EditAccount();
         }

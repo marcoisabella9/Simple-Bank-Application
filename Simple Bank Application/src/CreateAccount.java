@@ -89,7 +89,8 @@ public class CreateAccount implements ActionListener {
         createAccountFrame.add(mainPanel, BorderLayout.CENTER);
         createAccountFrame.add(footerPanel, BorderLayout.SOUTH);
 
-        ImageIcon bankIcon = new ImageIcon("resources/images/bank of marmerica icon.png");
+        //ImageIcon bankIcon = new ImageIcon("resources/images/bank of marmerica icon.png");
+        ImageIcon bankIcon = new ImageIcon(getClass().getClassLoader().getResource("images/bank of marmerica icon.png"));
         createAccountFrame.setIconImage(bankIcon.getImage());
 
         createAccountFrame.setTitle("BoM - Create Account");
@@ -99,7 +100,7 @@ public class CreateAccount implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == launchPageButton) {
-            SoundPlayer.playSound("resources/audio/click.wav");
+            SoundPlayer.playSound("audio/click.wav");
             createAccountFrame.dispose();
             new LaunchPage();
         }
@@ -112,19 +113,19 @@ public class CreateAccount implements ActionListener {
                     double startingBalance = Double.parseDouble(startingBalanceText);
                     BankAccount myBankAccount = new BankAccount(accountName, startingBalance);
 
-                    SoundPlayer.playSound("resources/audio/click.wav");
+                    SoundPlayer.playSound("audio/click.wav");
                     confirmMsgLabel.setText("Account Created Successfully");
 
                 } catch (NumberFormatException e2) {
-                    SoundPlayer.playSound("resources/audio/windowsxpError.wav");
+                    SoundPlayer.playSound("audio/windowsxpError.wav");
                     confirmMsgLabel.setText("Error - Enter Valid Starting Balance");
                 }
             } else {
                 if (BankAccount.accountExists(accountName)) {
-                    SoundPlayer.playSound("resources/audio/windowsxpError.wav");
+                    SoundPlayer.playSound("audio/windowsxpError.wav");
                     confirmMsgLabel.setText("Account with that name already exists");
                 } else {
-                    SoundPlayer.playSound("resources/audio/windowsxpError.wav");
+                    SoundPlayer.playSound("audio/windowsxpError.wav");
                     confirmMsgLabel.setText("Error - Account Name is required");
                 }
             }
